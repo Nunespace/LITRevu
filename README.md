@@ -20,21 +20,18 @@ L’application présente trois cas d’utilisation principaux :
 
 Si vous travaillez dans un environnement Linux ou MacOS : Python est en principe déjà installé. Pour le vérifier, ouvrez votre terminal et tapez : `python --version` ou `python3 --version`
 
-
 Si Python n'est pas installé, vous pouvez le télécharger à l'adresse suivante : 
 [Télécharger Python3](https://www.python.org/downloads)
 
 Vous aurez aussi besoin de l'installateur de paquets de Python **pip** qui est compris par défaut si vous disposez d'une version de Python >= 3.4. Vous pouvez vérifier qu'il est disponible via votre ligne de commande, en saisissant : `pip --version`
 
 Vous aurez aussi besoin de **Git** pour cloner l'application sur votre ordinateur. Vérifier son installation en tapant   `git --version`
-
 Sinon, choisissez et téléchargez la version de Git qui correspond à votre installation : MacOS, Windows ou Linux/Unix en cliquant sur le lien suivant : [télécharger git](https://git-scm.com/downloads)
-
  <sub>Puis exécutez le fichier que vous venez de télécharger. Appuyez sur _Suivant_ à chaque fenêtre puis sur _Installer_. Lors de l’installation, laissez toutes les options par défaut, elles conviennent bien. 
 Git Bash est l’interface permettant d’utiliser Git en ligne de commande.
 
 
-### 1° Installation et exécution de l'application web
+### 1° Installation de l'application web
 
 1. Ouvrez le terminal et tapez :
 ```
@@ -43,12 +40,12 @@ $ git clone https://github.com/Nunespace/LITRevu.git
 Vous pouvez également télécharger le code en temps qu'archive zip : [Projet_LITRevu](https://github.com/Nunespace/LITRevu/archive/refs/heads/main.zip)
 
 
-2. Placez-vous dans le répertoire Projet2 :
+2. Placez-vous dans le répertoire LITRevu :
 
 ```
-$ CD Projet2
+$ CD LITRevu
 ou
-$ CD chemin .../Projet2
+$ CD chemin .../LITRevu
 ```
 
 3. Créez votre environnement virtuel : 
@@ -84,17 +81,35 @@ $ pip install -r requirements.txt
 
 1. Activer votre environnement virtuel (Voir Installation 4. ci-dessus)
 
-
-2. Lancer le serveur en local
+2. Lancer le serveur en local[^2]
 ```
-$ python manage.py runserver [^2]
+$ python manage.py runserver 
 ```
 
-3. Ouvrez votre navigateur et taper l'url suivante : 
-[Site_LITRevu](http://127.0.0.1:8000/)
+3. Ouvrez votre navigateur et taper l'url suivante : http://127.0.0.1:8000/
+
+   ou cliquer sur ce lien : [Site_LITRevu](http://127.0.0.1:8000/)
 
 
-[^2]: tapez Ctrl-C our arrêter le serveur
+[^2]: tapez Ctrl-C pour arrêter le serveur
+
+
+## Administration du site 
+
+1. Créer votre accès superutilisateur pour la gestion du site en tapant:
+```
+$ python manage.py createsuperuser
+``` 
+
+2. Suivez les instructions après avoir choisi un identifiant(username) et un mot de passe
+
+3. Après avoir exécuter l'application (voir 2° ci-dessus), taper l'url suivante dans votre navigateur : http://127.0.0.1:8000/admin/
+
+ou cliquer sur ce lien : [Site_LITRevu](http://127.0.0.1:8000/admin/)
+
+4. Entrer votre identifiant et votre mot de passe pour accéder au site d'administration de Django : ce site permet de gérer toutes les opérations CRUD sur les données de l'application.
+
+
 
 
 
