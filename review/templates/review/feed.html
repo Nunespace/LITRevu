@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load review_extras %}
+{% block content %}
+
+<span class="visually-hidden">Page courante : page "Flux</span>
+
+      
+    <div class="d-grid gap-2 d-md-block m-1 text-center my-5">
+        <a href="{% url 'create_ticket' %}" class="btn btn-info text-light fw-bold btn-outline-secondary btn-lg mx-5">Demander une critique</a>
+        <a href="{% url 'create_ticket_and_review' %}" class="btn btn-primary text-light fw-bold btn-outline-secondary btn-lg mx-5">Créer une critique</a>
+    </div>
+
+<div class="row bg-info mx-auto w-50">
+    {% for post in page_obj %}
+    {% empty %}
+    <p class="text-center">Il n'y a pas de messages.</p>
+    {% endfor %}
+</div>
+    
+{% for post in page_obj %}
+{% if post|model_type == 'Ticket' %}
+{% include 'review/partials/ticket_snippet.html' with ticket=post %}
+{% elif post|model_type == 'Review' %}
+{% include 'review/partials/review_snippet.html' with review=post %}
+{% endif %}
+{% endfor %}
+
+<div class="container">
+    <div class="row bg-light py-3 text-primary text-center">
+        <div class="col">
+            <span>
+            {% if page_obj.has_previous %}
+                <a class="link-primary" href="?page=1">« première</a>
+                <a class="link-primary" href="?page={{ page_obj.previous_page_number }}">précédente</a>
+            {% endif %}
+        </div>
+        <div class="col">
+            <span>
+                Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
+            </span>
+        </div>
+        <div class="col">
+            {% if page_obj.has_next %}
+            <a class="link-primary" href="?page={{ page_obj.next_page_number }}">suivante</a>
+            <a class="link-primary" href="?page={{ page_obj.paginator.num_pages }}">dernière »</a>
+            {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
+

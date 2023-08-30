@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<span class="visually-hidden">Page courante : page "Posts"</span>
+
+{% for review in reviews %}
+{% include 'review/partials/review_snippet.html' %}       
+{% endfor %}
+
+
+{% for review in reviews %}
+ {% empty %}
+<div class="container mx-auto py-2 w-50">
+    <div class="row bg-primary">
+        <p>Vous n'avez pas encore publier de critiques.</p>
+{% endfor %}
+    </div>
+</div>
+
+{% for ticket in tickets %}
+{% include 'review/partials/ticket_snippet.html' %}
+{% endfor %}
+
+<div class="container mx-auto py-2 w-50">
+    <div class="row bg-info">
+           {% for ticket in tickets %}
+           {% empty %}
+               <p>Vous n'avez pas encore publier de ticket.</p>
+           {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock content %}

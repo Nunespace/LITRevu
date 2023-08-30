@@ -14,9 +14,68 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth.views import (
+    LoginView,
+    LogoutView,
+    PasswordChangeView,
+    PasswordChangeDoneView,
+)
+from django.conf import settings
+from django.conf.urls.static import static
+import authentication.views
+import review.views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path(
+        "",
+        LoginView.as_view(
+            template_name="authentication/login.html", redirect_authenticated_user=True
+        ),
+        name="login",
+    ),
+    path("logout/", LogoutView.as_view(), name="logout"),
+    path(
+        "change-password/",
+        PasswordChangeView.as_view(
+            template_name="authentication/password_change_form.html"
+        ),
+        name="password_change",
+    ),
+    path(
+        "change-password-done/",
+        PasswordChangeDoneView.as_view(
+            template_name="authentication/password_change_done.html"
+        ),
+        name="password_change_done",
+    ),
+    path("flux/", review.views.feed, name="feed"),
+    path("signup/", authentication.views.signup_page, name="signup"),
+    path("ticket/creer/", review.views.ticket_create, name="create_ticket"),
+    path("ticket/<int:id>/modifier/", review.views.ticket_update, name="update_ticket"),
+    path(
+        "ticket/<int:id>/supprimer/", review.views.ticket_delete, name="delete_ticket"
+    ),
+    path("critique/<int:id>/creer/", review.views.review_create, name="create_review"),
+    path(
+        "critique/<int:id>/modifier/", review.views.review_update, name="update_review"
+    ),
+    path(
+        "critique/<int:id>/supprimer/", review.views.review_delete, name="delete_review"
+    ),
+    path("ticket-et-critique/creer/", review.views.ticket_and_review_create, name="create_ticket_and_review"),
+    path("mes-publications/", review.views.my_posts, name="my_posts"),
+    path("abonnements/", review.views.user_follows, name="user_follows"),
+    path(
+        "abonnements/<int:id>/supprimer/",
+        review.views.user_follows_unsubscribe,
+        name="user_follows_unsubscribe",
+    ),
 ]
+
+# si on est dans notre environnement de développement
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

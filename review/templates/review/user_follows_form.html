@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<span class="visually-hidden">Page courante : page "Abonnements"</span>
+<p>{{ message }}</p>
+
+<div class="container">
+        <h1 class=""row">Suivre d'autres utilisateurs</h1>
+        <form method="post" class="row">
+            {{ form|crispy }}
+            {% csrf_token %}
+            
+            <button type="submit" class="btn btn-primary">Confirmer</button>
+        </form>
+</div>
+    
+<div class="container">
+    <div class="row">
+    <h2 class="mt-5"> Abonnements</h2>
+        <ul class="list-group list-group-flush">
+        {% for user in followed_users %}
+        <li class="list-group-item">{{ user.followed_user }}
+        <br>
+        <a href="{% url 'user_follows_unsubscribe' user.id %}">Désabonner</a></li>
+        {% endfor %}
+       </ul>
+       {% for user in followed_users %}
+       {% empty %}
+       <p>Vous n'êtes pas abonné(e) à un utilisateur.</p>
+       {% endfor %}
+    </div>
+    
+
+    <div class="row">
+       <h2 class="mt-5">Abonnés </h2>
+           <ul class="list-group list-group-flush">
+           {% for user in subscribed_users %}
+            <li class="list-group-item">{{ user.user }}</li>
+           {% endfor %}
+          </ul>
+        {% for user in subscribed_users %}
+       {% empty %}
+       <p>Vous n'êtes pas suivi(e) par d'autres utilisateurs.</p>
+       {% endfor %}
+    </div>
+
+</div>
+
+{% endblock content %}

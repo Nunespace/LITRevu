@@ -107,7 +107,7 @@ $ python manage.py createsuperuser
 
 ou cliquer sur ce lien : [Site_LITRevu](http://127.0.0.1:8000/admin/)
 
-4. Entrer votre identifiant et votre mot de passe pour accéder au site d'administration de Django : ce site permet de gérer toutes les opérations CRUD sur les données de l'application.
+4. Entrer votre identifiant et votre mot de passe pour accéder au site d'administration de Django : ce site permet de gérer toutes les opérations [CRUD](https://openclassrooms.com/fr/courses/7172076-debutez-avec-le-framework-django/7516605-effectuez-des-operations-crud-dans-ladministration-de-django) sur les données de l'application.
 
 
 

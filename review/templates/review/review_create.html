@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<p>{{ message }}</p>
+    <div class="container">
+        <h1 class="row">Créer une critique</h1>
+        <p>Vous êtes en train de poster une réponse à </p>
+        <div class="row">
+            <div class="card bg-info m-3" style="width: 18rem;">
+                <p class="card-text fst-italic">Ticket - {{ ticket.user }}</p>
+                {% if ticket.image %}
+                <img src="{{ticket.image.url}}" class="card-img-top width-25 img-fluid" alt="Image du livre">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{ ticket.title }}</h5>
+                    <p class="card-text">{{ ticket.description }}</p>
+                </div>
+            </div>
+        </div>
+        <form method="post" class="row">
+            {{ form|crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        </form>
+    <p class="fst-italic">Les champs marqués d'un astérisque (*) sont obligatoires</p>
+    </div>
+   
+{% endblock content %}

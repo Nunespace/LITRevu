@@ -1,0 +1,59 @@
+{% load review_extras %}
+
+<section aria-label="Critique" class="mx-auto my-3">
+    <div class="review container border border-primary bg-primary bg-gradient w-50">
+        <script>
+            function changeClassReview(){
+                console.log("Largeur de l'écran : " + window.screen.width + "px")
+                console.log("Largeur de la fenêtre : " + window.innerWidth + "px")
+                if (window.innerWidth <= 800){
+                    let tickets = document.querySelectorAll('.review')
+                    for(i=0;i<tickets.length;i++) {
+                        tickets[i].className = "container border border-primary bg-primary bg-gradient w-100";
+                    }
+                }
+            }
+            changeClassReview()
+        </script>
+        <div class="row">
+            <div class="col">
+                <p class="fst-italic"> {% get_poster_display review.user %} publié une critique</p>
+            </div>
+            <div class="col">
+                <p class="text-end">{{ review.time_created }}</p>
+            </div>
+        </div>
+        <div class="row">
+                <h3 class="fw-bold">{{ review.headline }} {{ review.rating|stars }}</h3>
+                <span class="visually-hidden">Note : {{ review.rating }} étoiles</span>
+        </div>
+        <div class="row">
+            <p>{{ review.body }}</p>
+        </div>
+        <div class="row">
+            <div class="card bg-info m-3 mx-auto" style="width: 18rem;">
+                <p class="card-text fst-italic">Ticket - {{ review.ticket.user }}</p>
+                {% if review.ticket.image %}
+                <img src="{{review.ticket.image.url}}" class="card-img-top img-fluid" alt="Image du livre" role="img">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{ review.ticket.title }}</h5> 
+                </div>
+            </div>
+        </div>
+
+        {% if review.user == request.user %}
+        <div class="d-none d-sm-block grid-sm gap-2 text-center my-1">
+            <a class="btn btn-outline-warning fw-bold btn-lg mx-5" aria-label="Modifier cette critique"href="{% url 'update_review' review.id %}">Modifier</a>
+            <a class="btn btn-outline-warning fw-bold btn-lg mx-5" aria-label="Supprimer cette critique" href="{% url 'delete_review' review.id %}">Supprimer</a>
+        </div>
+        <div class="d-sm-none d-grid gap-2 text-center my-1">
+            <a class="btn btn-outline-warning fw-bold btn-sm mx-5" aria-label="Modifier cette critique" href="{% url 'update_review' review.id %}">Modifier</a>
+            <a class="btn btn-outline-warning fw-bold btn-sm mx-5" aria-label="Supprimer cette critique" href="{% url 'delete_review' review.id %}">Supprimer</a>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+            
+       

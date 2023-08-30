@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<p>{{ message }}</p>
+    <div class="container">
+        <h1 class=""row">Modifier votre critique</h1>
+        <form method="post" class="row">
+            {{ form|crispy }}
+            {% csrf_token %}
+            
+            <button type="submit" class="btn btn-primary">Modifier</button>
+        </form>
+        <p class="fst-italic">Les champs marqués d'un astérisque (*) sont obligatoires</p>
+        <div class="row text-center my-3">
+            <a class="fw-bold" href="{% url 'my_posts' %}">ANNULER</a>
+        </div>
+    </div>
+   
+{% endblock content %}

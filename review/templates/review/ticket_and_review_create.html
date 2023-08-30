@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<p>{{ message }}</p>
+    <div class="container">
+        <h1 class=" row text-center">Créer un ticket et une critique</h1>
+        <form method="post" enctype="multipart/form-data" class="row">
+            <fieldset>
+                <legend> Votre ticket</legend>
+                {{ ticket_form|crispy }}
+            </fieldset>
+            <fieldset>
+                <legend> Votre critique</legend>
+            {{ review_form|crispy }}
+            {% csrf_token %}
+            </fieldset>
+            
+            <button type="submit" value="submit" class="btn btn-primary">Envoyer</button>
+        </form>
+        <p class="fst-italic">Les champs marqués d'un astérisque (*) sont obligatoires</p>
+    </div>
+   
+{% endblock content %}

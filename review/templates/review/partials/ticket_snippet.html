@@ -1,0 +1,61 @@
+{% load review_extras %}
+
+<section aria-label="Ticket" class="mx-auto my-3">
+    <div class=" ticket container border border-info bg-info w-50">
+        <script>
+            function changeClassTicket(){
+                console.log("Largeur de l'écran : " + window.screen.width + "px")
+                console.log("Largeur de la fenêtre : " + window.innerWidth + "px")
+                if (window.innerWidth <= 800){
+                    let tickets = document.querySelectorAll('.ticket')
+                    for(i=0;i<tickets.length;i++) {
+                        tickets[i].className = "container border border-info bg-info bg-gradient w-100";
+                    }
+                }
+            }
+            changeClassTicket()
+        </script>
+        <div class="row">
+            <div class="col">
+                <p class="fst-italic"> {% get_poster_display ticket.user %} publié un ticket</p>
+            </div>
+            <div class="col">
+                <p class="text-end">{{ ticket.time_created }}</p>
+            </div>
+        </div>
+        <div class="row">
+                <h3 class="fw-bold">{{ ticket.title }}</h3>
+        </div>
+        <div class="row">
+            <p>"" {{ ticket.description }} ""</p>
+        </div>
+        <div class="row">
+            <div class="card bg-info mx-auto m-sm-3" style="width: 18rem;">
+                {% if ticket.image %}
+                <img src="{{ticket.image.url}}" class="card-img-top img-fluid" alt="Image du livre" role="img">
+                {% endif %}
+            </div>
+            
+            {% if not ticket.review %}
+            <div class="col my-auto m-auto p-1">
+            <a href="{% url 'create_review' ticket.id %}" class="btn btn-primary btn-outline-secondary text-light fw-bold">Créer une critique</a>
+            </div>
+            {% endif %}
+        </div>
+        {% if ticket.user == request.user %}
+        <div class="d-none d-sm-block grid-sm gap-2 text-center my-1">
+            <a class="btn btn-outline-warning fw-bold btn-lg mx-5" aria-label="Modifier ce ticket" href="{% url 'update_ticket' ticket.id %}">Modifier</a>
+            <a class="btn btn-outline-warning fw-bold btn-lg mx-5" aria-label="Supprimer ce ticket" href="{% url 'delete_ticket' ticket.id %}">Supprimer</a>
+        </div>
+        <div class="d-sm-none d-grid gap-2 text-center my-1">
+            <a class="btn btn-outline-warning fw-bold btn-sm mx-5" aria-label="Modifier ce ticket" href="{% url 'update_ticket' ticket.id %}">Modifier</a>
+            <a class="btn btn-outline-warning fw-bold btn-sm mx-5" aria-label="Supprimer ce ticket" href="{% url 'delete_ticket' ticket.id %}">Supprimer</a>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+        
+
+

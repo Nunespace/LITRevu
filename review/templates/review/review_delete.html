@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<p>{{ message }}</p>
+    <div class="container">
+        <h1 class="row">Supprimer votre critique</h1>
+        <form method="post" class="row">
+            {{ form|crispy }}
+            {% csrf_token %}
+            <p>Etes-vous sûr de vouloir supprimer cette critique : {{ review.titre }} ?</p>
+            <input type="submit" value="Supprimer" class="btn btn-primary">
+            <div class="row text-center my-3">
+                <a class="fw-bold" href="{% url 'my_posts' %}">ANNULER</a>
+            </div>
+        </form>
+    
+    </div>
+   
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<p>{{ message }}</p>
+    <div class="container">
+        <h1 class="row">Se connecter à LITRevu</h1>  
+        
+        <form method="post" class="row">
+            {{ form|crispy }}
+            {% csrf_token %}
+            
+            <button type="submit" class="btn btn-primary">Se connecter</button>
+        </form>
+    
+        <p>Pas encore membre ? <a href="{% url 'signup' %}">Inscrivez-vous maintenant !</a></p>
+    </div>
+   
+{% endblock content %}
