@@ -37,7 +37,7 @@
             </div>
             
             {% if not ticket.review %}
-            <div class="col my-auto m-auto p-1">
+            <div class="col my-auto mx-sm-5 p-1">
             <a href="{% url 'create_review' ticket.id %}" class="btn btn-primary btn-outline-secondary text-light fw-bold">Créer une critique</a>
             </div>
             {% endif %}

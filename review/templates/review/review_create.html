@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-
 {% load crispy_forms_tags %}
+{% crispy example_form %}
+
 
 {% block content %}
 <p>{{ message }}</p>
@@ -20,7 +21,7 @@
             </div>
         </div>
         <form method="post" class="row">
-            {{ form|crispy }}
+            {% crispy form %}
             {% csrf_token %}
             <button type="submit" class="btn btn-primary">Envoyer</button>
         </form>
