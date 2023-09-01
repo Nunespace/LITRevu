@@ -1,7 +1,7 @@
 {% load review_extras %}
 
 <section aria-label="Ticket" class="mx-auto my-3">
-    <div class=" ticket container border border-info bg-info w-50">
+    <div class=" ticket container border border-info bg-info rounded w-50">
         <script>
             function changeClassTicket(){
                 console.log("Largeur de l'écran : " + window.screen.width + "px")
@@ -30,15 +30,21 @@
             <p>"" {{ ticket.description }} ""</p>
         </div>
         <div class="row">
-            <div class="card bg-info mx-auto m-sm-3" style="width: 18rem;">
-                {% if ticket.image %}
-                <img src="{{ticket.image.url}}" class="card-img-top img-fluid" alt="Image du livre" role="img">
-                {% endif %}
+            <div class="col mx-auto">
+                <div class="card bg-info mx-auto m-sm-5" style="width: 15rem;">
+                    {% if ticket.image %}
+                    <img src="{{ticket.image.url}}" class="card-img-top img-fluid" alt="Image du livre">
+                    {% endif %}
+                </div>
             </div>
             
             {% if not ticket.review %}
             <div class="col my-auto mx-sm-5 p-1">
             <a href="{% url 'create_review' ticket.id %}" class="btn btn-primary btn-outline-secondary text-light fw-bold">Créer une critique</a>
+            </div>
+            {% endif %}
+            {% if ticket.review %}
+            <div class="col mx-1">
             </div>
             {% endif %}
         </div>

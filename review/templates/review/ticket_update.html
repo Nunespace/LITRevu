@@ -10,11 +10,11 @@
             {{ form|crispy }}
             {% csrf_token %}
             
-            <button type="submit" class="btn btn-primary">Modifier</button>
+            <button type="submit" class="btn btn-primary fs-5">Modifier</button>
         </form>
         <p class="fst-italic">Les champs marqués d'un astérisque (*) sont obligatoires</p>
         <div class="row text-center my-3">
-            <a class=" fw-bold" href="{% url 'my_posts' %}">ANNULER</a>
+            <a class=" fw-bold" href="{% url 'my_posts' %}">Annuler</a>
         </div>
     </div>
    

@@ -1,7 +1,7 @@
 {% load review_extras %}
 
 <section aria-label="Critique" class="mx-auto my-3">
-    <div class="review container border border-primary bg-primary bg-gradient w-50">
+    <div class="review container border border-1 border-secondary rounded w-50" style=" background: #bfd4e3; ">
         <script>
             function changeClassReview(){
                 console.log("Largeur de l'écran : " + window.screen.width + "px")
@@ -31,7 +31,7 @@
             <p>{{ review.body }}</p>
         </div>
         <div class="row">
-            <div class="card bg-info m-3 mx-auto" style="width: 18rem;">
+            <div class="card bg-info m-3 mx-auto" style="width: 15rem;">
                 <p class="card-text fst-italic">Ticket - {{ review.ticket.user }}</p>
                 {% if review.ticket.image %}
                 <img src="{{review.ticket.image.url}}" class="card-img-top img-fluid" alt="Image du livre" role="img">
@@ -44,12 +44,12 @@
 
         {% if review.user == request.user %}
         <div class="d-none d-sm-block grid-sm gap-2 text-center my-1">
-            <a class="btn btn-outline-warning fw-bold btn-lg mx-5" aria-label="Modifier cette critique"href="{% url 'update_review' review.id %}">Modifier</a>
-            <a class="btn btn-outline-warning fw-bold btn-lg mx-5" aria-label="Supprimer cette critique" href="{% url 'delete_review' review.id %}">Supprimer</a>
+            <a class="btn btn-outline-warning fw-bold btn-lg mx-5 text-light" aria-label="Modifier cette critique" href="{% url 'update_review' review.id %}">Modifier</a>
+            <a class="btn btn-outline-warning fw-bold btn-lg mx-5 text-light" aria-label="Supprimer cette critique" href="{% url 'delete_review' review.id %}">Supprimer</a>
         </div>
         <div class="d-sm-none d-grid gap-2 text-center my-1">
-            <a class="btn btn-outline-warning fw-bold btn-sm mx-5" aria-label="Modifier cette critique" href="{% url 'update_review' review.id %}">Modifier</a>
-            <a class="btn btn-outline-warning fw-bold btn-sm mx-5" aria-label="Supprimer cette critique" href="{% url 'delete_review' review.id %}">Supprimer</a>
+            <a class="btn btn-outline-warning fw-bold btn-sm mx-5 text-light" aria-label="Modifier cette critique" href="{% url 'update_review' review.id %}">Modifier</a>
+            <a class="btn btn-outline-warning fw-bold btn-sm mx-5 text-light" aria-label="Supprimer cette critique" href="{% url 'delete_review' review.id %}">Supprimer</a>
         </div>
         {% endif %}
 

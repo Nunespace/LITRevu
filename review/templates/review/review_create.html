@@ -10,7 +10,7 @@
         <p>Vous êtes en train de poster une réponse à </p>
         <div class="row">
             <div class="card bg-info m-3" style="width: 18rem;">
-                <p class="card-text fst-italic">Ticket - {{ ticket.user }}</p>
+                <p class="card-text fst-italic text-center">{{ ticket.user }} a demandé une critique</p>
                 {% if ticket.image %}
                 <img src="{{ticket.image.url}}" class="card-img-top width-25 img-fluid" alt="Image du livre">
                 {% endif %}
@@ -23,7 +23,7 @@
         <form method="post" class="row">
             {% crispy form %}
             {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Envoyer</button>
+            <button type="submit" class="btn btn-primary fs-5">Envoyer</button>
         </form>
     <p class="fst-italic">Les champs marqués d'un astérisque (*) sont obligatoires</p>
     </div>

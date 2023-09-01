@@ -96,12 +96,12 @@ $ python manage.py runserver
 
 ## Administration du site 
 
-1. Créer votre accès superutilisateur pour la gestion du site en tapant:
+1. Créer votre accès superutilisateur pour la gestion du site en tapant :
 ```
 $ python manage.py createsuperuser
 ``` 
 
-2. Suivez les instructions après avoir choisi un identifiant(username) et un mot de passe
+2. Suivez les instructions après avoir choisi un identifiant(username) et un mot de passe : Voir la [documentation officielle de Django si besoin](https://docs.djangoproject.com/fr/4.2/topics/auth/default/)
 
 3. Après avoir exécuter l'application (voir 2° ci-dessus), taper l'url suivante dans votre navigateur : http://127.0.0.1:8000/admin/
 

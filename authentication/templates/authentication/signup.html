@@ -4,14 +4,14 @@
 
 {% block content %}
 <div class="container">
-    <h2 class=""row">Inscription</h2>
+    <h2 class="row">Inscription</h2>
     {% if form.errors %}
         {{ form.errors }}
     {% endif %}
     <form method="post" class="row">
         {{ form|crispy }}
         {% csrf_token %}
-        <button type="submit" class="btn btn-primary" >S’inscrire</button>
+        <button type="submit" class="btn btn-primary fs-5" >S’inscrire</button>
     </form>
     <div class="row text-center my-3">
         <a class="fw-bold" href="{% url 'login' %}">Retourner</a>

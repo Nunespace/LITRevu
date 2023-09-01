@@ -5,12 +5,12 @@
 {% block content %}
 <p>{{ message }}</p>
     <div class="container">
-        <h1 class=""row">Se désabonner</h1>
+        <h1 class="row">Se désabonner</h1>
         <form method="post" class="row">
             {{ form|crispy }}
             {% csrf_token %}
             <p>Etes-vous sûr de ne plus vouloir suivre ce lecteur  : {{ followed_user.lecteur_suivi }} ?</p>
-            <input type="submit" value="Supprimer" class="btn btn-primary">
+            <input type="submit" value="Supprimer" class="btn btn-primary fs-5">
         </form>
 
         <div class="row text-center my-3">

@@ -5,15 +5,15 @@
 {% block content %}
 <p>{{ message }}</p>
     <div class="container">
-        <h1 class=""row">Supprimer votre ticket</h1>
+        <h1 class="row">Supprimer votre ticket</h1>
         <form method="post" class="row">
             {{ form|crispy }}
             {% csrf_token %}
             <p>Etes-vous sûr de vouloir supprimer ce ticket : {{ ticket.titre }} ?</p>
-            <input type="submit" value="Supprimer" class="btn btn-primary">
+            <input type="submit" value="Supprimer" class="btn btn-primary fs-4 fw-bold">
         </form>
         <div class="row text-center">
-            <a class="fw-bold" href="{% url 'my_posts' %}">ANNULER</a>
+            <a class="fw-bold" href="{% url 'my_posts' %}">Annuler</a>
         </div>
     
     </div>

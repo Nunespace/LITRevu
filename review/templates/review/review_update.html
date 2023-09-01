@@ -1,20 +1,32 @@
 {% extends 'base.html' %}
-
 {% load crispy_forms_tags %}
 
 {% block content %}
-<p>{{ message }}</p>
+
     <div class="container">
-        <h1 class=""row">Modifier votre critique</h1>
+        <h1 class="row">Modifier votre critique</h1>
+        <p>Vous êtes en train de poster une réponse à </p>
+        <div class="row">
+            <div class="card bg-info m-3" style="width: 15rem;">
+                <p class="card-text fst-italic text-center">{{ ticket.user }} a demandé une critique</p>
+                {% if ticket.image %}
+                <img src="{{ticket.image.url}}" class="card-img-top width-25 img-fluid" alt="Image du livre">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{ ticket.title }}</h5>
+                    <p class="card-text">{{ ticket.description }}</p>
+                </div>
+            </div>
+        </div>
         <form method="post" class="row">
             {{ form|crispy }}
             {% csrf_token %}
             
-            <button type="submit" class="btn btn-primary">Modifier</button>
+            <button type="submit" class="btn btn-primary fs-5">Modifier</button>
         </form>
         <p class="fst-italic">Les champs marqués d'un astérisque (*) sont obligatoires</p>
         <div class="row text-center my-3">
-            <a class="fw-bold" href="{% url 'my_posts' %}">ANNULER</a>
+            <a class="fw-bold" href="{% url 'my_posts' %}">Annuler</a>
         </div>
     </div>
    

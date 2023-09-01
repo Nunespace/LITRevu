@@ -1,8 +1,6 @@
 from django.db import models
-
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
-from PIL import Image
 
 
 class Ticket(models.Model):
@@ -11,21 +9,7 @@ class Ticket(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.ImageField(max_length=100, null=True, blank=True, verbose_name="Image")
     time_created = models.DateTimeField(auto_now_add=True)
-    review = models.BooleanField(default=False)
-    #IMAGE_MAX_SIZE = (50, 50)
-
-    """
-    def resize_image(self):
-        image = Image.open(self.image)
-        image.thumbnail(self.IMAGE_MAX_SIZE)
-        # sauvegarde de l’image redimensionnée dans le système de fichiers
-        # différent de la méthode save() du modèle
-        image.save(self.image.path)
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        self.resize_image()
-    """
+    review = models.BooleanField(default=False)  
 
     def __str__(self):
         return f"{self.title}"
@@ -64,3 +48,4 @@ class UserFollows(models.Model):
         # garantit que nous n’obtenons pas plusieurs instances UserFollows
         # pour les paires "utilisateur-utilisateur_suivi" uniques
         unique_together = ("user", "followed_user")
+        

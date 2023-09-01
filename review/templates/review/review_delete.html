@@ -10,9 +10,9 @@
             {{ form|crispy }}
             {% csrf_token %}
             <p>Etes-vous sûr de vouloir supprimer cette critique : {{ review.titre }} ?</p>
-            <input type="submit" value="Supprimer" class="btn btn-primary">
+            <input type="submit" value="Supprimer" class="btn btn-primary fs-4 fw-bold">
             <div class="row text-center my-3">
-                <a class="fw-bold" href="{% url 'my_posts' %}">ANNULER</a>
+                <a class="fw-bold" href="{% url 'my_posts' %}">Annuler</a>
             </div>
         </form>
     

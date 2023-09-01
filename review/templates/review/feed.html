@@ -7,7 +7,7 @@
       
     <div class="d-grid gap-2 d-md-block m-1 text-center my-5">
         <a href="{% url 'create_ticket' %}" class="btn btn-info text-light fw-bold btn-outline-secondary btn-lg mx-5">Demander une critique</a>
-        <a href="{% url 'create_ticket_and_review' %}" class="btn btn-primary text-light fw-bold btn-outline-secondary btn-lg mx-5">Créer une critique</a>
+        <a href="{% url 'create_ticket_and_review' %}" class="btn btn-info text-light fw-bold btn-outline-secondary btn-lg mx-5">Créer une critique</a>
     </div>
 
 <div class="row bg-info mx-auto w-50">
@@ -30,9 +30,10 @@
         <div class="col">
             <span>
             {% if page_obj.has_previous %}
-                <a class="link-primary" href="?page=1">« première</a>
-                <a class="link-primary" href="?page={{ page_obj.previous_page_number }}">précédente</a>
+                <a class="link-primary" aria-label="Aller sur la première page" href="?page=1">« première</a>
+                <a class="link-primary" aria-label="Page précédente" href="?page={{ page_obj.previous_page_number }}">précédente</a>
             {% endif %}
+            </span>
         </div>
         <div class="col">
             <span>
@@ -40,9 +41,10 @@
             </span>
         </div>
         <div class="col">
+            <span>
             {% if page_obj.has_next %}
-            <a class="link-primary" href="?page={{ page_obj.next_page_number }}">suivante</a>
-            <a class="link-primary" href="?page={{ page_obj.paginator.num_pages }}">dernière »</a>
+            <a class="link-primary" aria-label="Page suivante" href="?page={{ page_obj.next_page_number }}">suivante</a>
+            <a class="link-primary" aria-label="Aller sur la dernière page" href="?page={{ page_obj.paginator.num_pages }}">dernière »</a>
             {% endif %}
             </span>
         </div>
