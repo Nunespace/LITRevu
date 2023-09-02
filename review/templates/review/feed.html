@@ -6,8 +6,8 @@
 
       
     <div class="d-grid gap-2 d-md-block m-1 text-center my-5">
-        <a href="{% url 'create_ticket' %}" class="btn btn-info text-light fw-bold btn-outline-secondary btn-lg mx-5">Demander une critique</a>
-        <a href="{% url 'create_ticket_and_review' %}" class="btn btn-info text-light fw-bold btn-outline-secondary btn-lg mx-5">Créer une critique</a>
+        <a href="{% url 'create_ticket' %}" class="btn btn-info text-dark fw-bold btn-outline-secondary btn-lg mx-5">Demander une critique</a>
+        <a href="{% url 'create_ticket_and_review' %}" class="btn btn-info text-dark fw-bold btn-outline-secondary btn-lg mx-5">Créer une critique</a>
     </div>
 
 <div class="row bg-info mx-auto w-50">
@@ -26,7 +26,7 @@
 {% endfor %}
 
 <div class="container">
-    <div class="row bg-light py-3 text-primary text-center">
+    <div class="row bg-light py-3 text-primary text-center fs-5 fw-bold">
         <div class="col">
             <span>
             {% if page_obj.has_previous %}

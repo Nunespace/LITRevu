@@ -14,9 +14,14 @@
     </head>
     <header role="banner" class="py-4">
         
-        {% if user.is_authenticated %}
         <nav role="navigation" aria-label="Navigation Principale" class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
             <div class="container">
+                {% if not user.is_authenticated %}
+                <span class=" navbar-brand border border-secondary fw-bold p-1 rounded text-light mx-auto">
+                    <img src="{% static 'images/LITrevu_banner.png' %}" class="w-100" alt="Logo LITRevu" role="img">
+                </span>
+                {% endif %}
+                {% if user.is_authenticated %}
                 <span class=" navbar-brand border border-secondary fw-bold p-1 rounded text-light">
                     <img src="{% static 'images/LITrevu_banner.png' %}" class="w-100" alt="Logo LITRevu" role="img">
                 </span>
@@ -40,19 +45,20 @@
                     </ul>
                 </div>
             </div>
-        <nav>
+        
             <script>
                 function setActive() {
                   aObj = document.querySelector('nav').getElementsByTagName('a');
                   for(i=0;i<aObj.length;i++) {
                     if(document.location.href.indexOf(aObj[i].href)>=0) {
-                      aObj[i].className='nav-link btn-lg btn-outline-secondary active';
+                      aObj[i].className='nav-link btn-lg btn-outline-secondary fw-bold active';
                       aObj[i].ariaCurrent='page';
                     }
                   }
                 }
                 window.onload = setActive();
             </script>
+        <nav>
         {% endif %}
     </header>
     <body class="bg-light mt-5" style="font-family: 'Open Sans', sans-serif;">
@@ -69,7 +75,7 @@
         <div class="container">
             <div class="row text-center m-5">
                 <p class=" fst-italic">Vous êtes connecté(e) en tant que {{ request.user }}. </p>
-                <p>Voulez-vous <a href="{% url 'password_change' %}" class="text-warning">changer votre mot de passe ?</a></p>
+                <p>Voulez-vous <a href="{% url 'password_change' %}" class="text-dark">changer votre mot de passe ?</a></p>
             </div>
         {% endif %}
         </div>
