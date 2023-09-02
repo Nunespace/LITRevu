@@ -8,11 +8,12 @@ from django.db.models import Q
 
 from django.core.paginator import Paginator
 
+print
+
 
 @login_required
 def ticket_create(request):
     form = TicketForm()
-    print("La méthode de requête est : ", request.method)
     if request.method == "POST":
         form = TicketForm(request.POST, request.FILES)
         if form.is_valid():
@@ -20,8 +21,6 @@ def ticket_create(request):
             # définit le lecteur à l’utilisateur courant avant d’enregistrer le modèle
             ticket.user = request.user
             ticket.save()
-            print("okkk", form.cleaned_data)
-            print("Les données POST sont : ", request.POST)
             return redirect("my_posts")
     else:
         form = TicketForm()
@@ -92,12 +91,9 @@ def review_update(request, id):
 def review_delete(request, id):
     review = Review.objects.get(id=id)
     ticket = review.ticket
-    print("review.ticket: ", review.ticket)
-    print("ticket.review: ", ticket.review)
     if request.method == "POST":
         ticket.review = False
         ticket.save()
-        print("ticket.review après save: ", ticket.review)
         review.delete()
         return redirect("my_posts")
     return render(request, "review/review_delete.html", {"review": review})
@@ -145,7 +141,6 @@ def user_follows(request):
     subscribed_users = models.UserFollows.objects.filter(
         followed_user__id=request.user.id
     )
-    print("followed_users : ", followed_users)
     if request.method == "POST":
         form = UserFollowsForm(request.POST)
         if form.is_valid():
@@ -183,9 +178,9 @@ def user_follows_unsubscribe(request, id):
 @login_required
 def feed(request):
     reviews = get_users_viewable_reviews(request)
-    viewable_tickets = get_users_viewable_tickets(request)
+    tickets = get_users_viewable_tickets(request)
     posts = sorted(
-        chain(reviews, viewable_tickets),
+        chain(reviews, tickets),
         key=lambda post: post.time_created,
         reverse=True,
     )
@@ -212,6 +207,12 @@ def get_users_viewable_reviews(request):
             Q(user__id=user.followed_user.id) & ~Q(ticket__in=my_tickets)
         )
         list_viewable_reviews.extend(reviews)
+        tickets = Ticket.objects.filter(
+            Q(user__id=user.followed_user.id) & Q(review=True)
+        )
+        reviews_for_my_users_followed = Review.objects.filter(ticket__in=tickets)
+        list_viewable_reviews.extend(reviews_for_my_users_followed)
+    list_viewable_reviews = list(set(list_viewable_reviews))
     return list_viewable_reviews
 
 
