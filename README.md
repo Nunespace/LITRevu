@@ -35,7 +35,7 @@ Git Bash est l’interface permettant d’utiliser Git en ligne de commande.
 
 1. Ouvrez le terminal et tapez :
 ```
-$ git clone https://github.com/Nunespace/LITRevu.git
+git clone https://github.com/Nunespace/LITRevu.git
 ```
 Vous pouvez également télécharger le code en temps qu'archive zip : [Projet_LITRevu](https://github.com/Nunespace/LITRevu/archive/refs/heads/main.zip)
 
@@ -43,9 +43,9 @@ Vous pouvez également télécharger le code en temps qu'archive zip : [Projet_L
 2. Placez-vous dans le répertoire LITRevu :
 
 ```
-$ CD LITRevu
+CD LITRevu
 ou
-$ CD chemin .../LITRevu
+CD chemin .../LITRevu
 ```
 
 3. Créez votre environnement virtuel : 
@@ -64,16 +64,16 @@ python -m venv env
 
 > sous mac ou Linux :
 ```
-$ source env/bin/activate  
+source env/bin/activate  
 ```
 > sous Windows, la commande sera :
 ```
-$ env\Scripts\activate.bat
+env\Scripts\activate.bat
 ```
 
 5. Puis installez les paquets répertoriés dans le fichier requirements.txt :
 ```
-$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 [^1]: selon la version de Python installée sur votre PC.
 
@@ -83,7 +83,7 @@ $ pip install -r requirements.txt
 
 2. Lancer le serveur en local[^2]
 ```
-$ python manage.py runserver 
+python manage.py runserver 
 ```
 
 3. Ouvrez votre navigateur et taper l'url suivante : http://127.0.0.1:8000/
@@ -98,7 +98,7 @@ $ python manage.py runserver
 
 1. Créer votre accès superutilisateur pour la gestion du site en tapant :
 ```
-$ python manage.py createsuperuser
+python manage.py createsuperuser
 ``` 
 
 2. Suivez les instructions après avoir choisi un identifiant(username) et un mot de passe : Voir la [documentation officielle de Django si besoin](https://docs.djangoproject.com/fr/4.2/topics/auth/default/)
