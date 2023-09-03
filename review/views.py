@@ -13,6 +13,7 @@ print
 
 @login_required
 def ticket_create(request):
+    """ Traite les données du formulaire pour créer un ticket (bouton "Demander une critique de la page Flux)"""
     form = TicketForm()
     if request.method == "POST":
         form = TicketForm(request.POST, request.FILES)
@@ -51,6 +52,8 @@ def ticket_delete(request, id):
 
 @login_required
 def review_create(request, id):
+    """ Traite les données du formulaire pour créer une critique
+    (bouton "Créer une critique" à côté de chaque nouveau ticket)"""
     ticket = Ticket.objects.get(id=id)
     form = ReviewForm()
     if request.method == "POST":
@@ -101,6 +104,8 @@ def review_delete(request, id):
 
 @login_required
 def ticket_and_review_create(request):
+    """Traite les données du formulaire de création de ticket et d'une critique en une seule étape
+    (bouton "Créer une critique" en haut de la page Flux)"""
     ticket_form = TicketForm()
     review_form = ReviewForm()
     if request.method == "POST":
@@ -125,6 +130,7 @@ def ticket_and_review_create(request):
 
 @login_required
 def my_posts(request):
+    """Page Posts"""
     tickets = Ticket.objects.filter(user__id=request.user.id)
     reviews = Review.objects.filter(user__id=request.user.id)
     return render(
@@ -136,6 +142,7 @@ def my_posts(request):
 
 @login_required
 def user_follows(request):
+    """Page "Abonnements"""
     form = UserFollowsForm(instance=request.user)
     followed_users = models.UserFollows.objects.filter(user__id=request.user.id)
     subscribed_users = models.UserFollows.objects.filter(
@@ -177,6 +184,7 @@ def user_follows_unsubscribe(request, id):
 
 @login_required
 def feed(request):
+    """Page Flux"""
     reviews = get_users_viewable_reviews(request)
     tickets = get_users_viewable_tickets(request)
     posts = sorted(
@@ -193,6 +201,8 @@ def feed(request):
 
 @login_required
 def get_users_viewable_reviews(request):
+    """Crée une liste de critiques composée des critiques de l'utilsateur connecté
+    et des critiques des utilisateurs que ce dernier suit"""
     list_viewable_reviews = []
     my_tickets = Ticket.objects.filter(user__id=request.user.id)
     reviews_for_my_tickets = Review.objects.filter(ticket__in=my_tickets)
@@ -203,6 +213,7 @@ def get_users_viewable_reviews(request):
     list_viewable_reviews.extend(reviews_for_my_tickets)
     users_followed = UserFollows.objects.filter(user__id=request.user.id)
     for user in users_followed:
+        # Critiques des utilisateurs suivis par l'utilisateur connecté
         reviews = Review.objects.filter(
             Q(user__id=user.followed_user.id) & ~Q(ticket__in=my_tickets)
         )
@@ -210,14 +221,18 @@ def get_users_viewable_reviews(request):
         tickets = Ticket.objects.filter(
             Q(user__id=user.followed_user.id) & Q(review=True)
         )
-        reviews_for_my_users_followed = Review.objects.filter(ticket__in=tickets)
-        list_viewable_reviews.extend(reviews_for_my_users_followed)
+        # Possibilité de rajouter les critiques des utilisateurs non suivis postées
+        #  en réponse aux tickets des utilisateurs suivis avec ces 2 lignes :
+        # reviews_for_my_users_followed = Review.objects.filter(ticket__in=tickets)
+        # list_viewable_reviews.extend(reviews_for_my_users_followed)
     list_viewable_reviews = list(set(list_viewable_reviews))
     return list_viewable_reviews
 
 
 @login_required
 def get_users_viewable_tickets(request):
+    """Crée une liste de tickets composée des tickets de l'utilsateur connecté
+    et des tickets des utilisateurs que ce dernier suit"""
     users_followed = UserFollows.objects.filter(user__id=request.user.id)
     list_viewable_tickets = []
     my_tickets = Ticket.objects.filter(user__id=request.user.id)

@@ -53,6 +53,7 @@
             <a class="btn btn-outline-warning fw-bold btn-lg mx-5 text-dark" aria-label="Modifier ce ticket" href="{% url 'update_ticket' ticket.id %}">Modifier</a>
             <a class="btn btn-outline-warning fw-bold btn-lg mx-5 text-dark" aria-label="Supprimer ce ticket" href="{% url 'delete_ticket' ticket.id %}">Supprimer</a>
         </div>
+        <!-- Boutons identiques mais avec une mise en forme différente pour les petits écrans -->
         <div class="d-sm-none d-grid gap-2 text-center my-1">
             <a class="btn btn-outline-warning fw-bold btn-sm mx-5 text-dark" aria-label="Modifier ce ticket" href="{% url 'update_ticket' ticket.id %}">Modifier</a>
             <a class="btn btn-outline-warning fw-bold btn-sm mx-5 text-dark" aria-label="Supprimer ce ticket" href="{% url 'delete_ticket' ticket.id %}">Supprimer</a>
